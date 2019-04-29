@@ -1,0 +1,1 @@
+[{"id":"b46f9456.71e1d","type":"function","z":"b0e87ca4.34914","name":"INSERT Data","func":"var newMsg = {payload : msg.payload};\nnewMsg.topic =\"INSERT INTO `sensors` (`sensor1`, `sensor2`, `sensor3`) VALUES (\"+newMsg.payload+\")\";\nreturn newMsg;","outputs":1,"noerr":0,"x":390,"y":180,"wires":[["604faa29.6c0544","ca712669.4e7c58"]]}]

@@ -1,0 +1,254 @@
+[
+    {
+        "id": "e9331922.c75e68",
+        "type": "tab",
+        "label": "PLC sensors read",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7241c3a8.ec4d5c",
+        "type": "modbus-client",
+        "z": "",
+        "name": "",
+        "clienttype": "simpleser",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyS10",
+        "serialType": "RTU",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "2",
+        "reconnectTimeout": "200"
+    },
+    {
+        "id": "9b8f9a64.bf7b4",
+        "type": "modbus-client",
+        "z": "",
+        "name": "",
+        "clienttype": "simpleser",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyr01",
+        "serialType": "RTU",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "100",
+        "unit_id": "1",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectTimeout": "2000"
+    },
+    {
+        "id": "ce8d5b94.782998",
+        "type": "modbus-client",
+        "z": "",
+        "name": "",
+        "clienttype": "serial",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "tcpHost": "192.168.127.254",
+        "tcpPort": "966",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyr00",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "9600",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "200",
+        "unit_id": "16",
+        "commandDelay": "1",
+        "clientTimeout": "1000",
+        "reconnectTimeout": "200"
+    },
+    {
+        "id": "7603d832.e2481",
+        "type": "modbus-client",
+        "z": 0,
+        "name": "Raspberry Pi Serial",
+        "clienttype": "serial",
+        "bufferCommands": true,
+        "stateLogEnabled": false,
+        "tcpHost": "127.0.0.1",
+        "tcpPort": "15502",
+        "tcpType": "DEFAULT",
+        "serialPort": "/dev/ttyUSB0",
+        "serialType": "RTU-BUFFERD",
+        "serialBaudrate": "115200",
+        "serialDatabits": "8",
+        "serialStopbits": "1",
+        "serialParity": "none",
+        "serialConnectionDelay": "500",
+        "unit_id": "",
+        "commandDelay": 100,
+        "clientTimeout": 1000,
+        "reconnectTimeout": 2000
+    },
+    {
+        "id": "eeae397e.26dd28",
+        "type": "function",
+        "z": "e9331922.c75e68",
+        "name": "value 1 ",
+        "func": "// save the value & remove trailing decimal places\nvalue = msg.payload;\nmsg.payload = value;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 560,
+        "y": 260,
+        "wires": [
+            [
+                "f406fd23.cea678"
+            ]
+        ]
+    },
+    {
+        "id": "204cb24d.226396",
+        "type": "modbus-read",
+        "z": "e9331922.c75e68",
+        "name": "sensor 1 ",
+        "topic": "",
+        "showStatusActivities": true,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "16",
+        "dataType": "HoldingRegister",
+        "adr": "64",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "ce8d5b94.782998",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "x": 230,
+        "y": 260,
+        "wires": [
+            [
+                "eeae397e.26dd28"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f406fd23.cea678",
+        "type": "debug",
+        "z": "e9331922.c75e68",
+        "name": "result",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 810,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a8e86e49.17dbb8",
+        "type": "function",
+        "z": "e9331922.c75e68",
+        "name": "value 2",
+        "func": "// save the value & remove trailing decimal places\nvalue2 = msg.payload;\nmsg.payload = value2;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 340,
+        "wires": [
+            [
+                "f406fd23.cea678"
+            ]
+        ]
+    },
+    {
+        "id": "1dd4c44.ef0dd3c",
+        "type": "function",
+        "z": "e9331922.c75e68",
+        "name": "value 3",
+        "func": "// save the value & remove trailing decimal places\nvalue3 = msg.payload;\nmsg.payload = value3;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 550,
+        "y": 420,
+        "wires": [
+            [
+                "f406fd23.cea678"
+            ]
+        ]
+    },
+    {
+        "id": "7f9fbe52.b509b8",
+        "type": "modbus-read",
+        "z": "e9331922.c75e68",
+        "name": "sensor 2 ",
+        "topic": "",
+        "showStatusActivities": true,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "16",
+        "dataType": "HoldingRegister",
+        "adr": "65",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "ce8d5b94.782998",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "x": 230,
+        "y": 340,
+        "wires": [
+            [
+                "a8e86e49.17dbb8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "583b5874.0b64b",
+        "type": "modbus-read",
+        "z": "e9331922.c75e68",
+        "name": "sensor 3 ",
+        "topic": "",
+        "showStatusActivities": true,
+        "logIOActivities": false,
+        "showErrors": true,
+        "unitid": "16",
+        "dataType": "HoldingRegister",
+        "adr": "66",
+        "quantity": "1",
+        "rate": "1",
+        "rateUnit": "s",
+        "delayOnStart": false,
+        "startDelayTime": "",
+        "server": "ce8d5b94.782998",
+        "useIOFile": false,
+        "ioFile": "",
+        "useIOForPayload": false,
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "1dd4c44.ef0dd3c"
+            ],
+            []
+        ]
+    }
+]
